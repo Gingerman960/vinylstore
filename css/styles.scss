@@ -1,0 +1,467 @@
+@import "~bootstrap/scss/bootstrap";
+
+$main-blue: #083644;
+$dark-blue: #0A2530;
+$gray: #738286;
+$beige: #FFEACE;
+$orange: #f2bd59;
+$red: #ff5722;
+$green: #00737C;
+$svg-white: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(9%) hue-rotate(174deg) brightness(101%) contrast(107%);
+$svg-orange: brightness(0) saturate(100%) invert(87%) sepia(87%) saturate(6340%) hue-rotate(314deg) brightness(99%) contrast(92%);
+$svg-red: brightness(0) saturate(100%) invert(55%) sepia(51%) saturate(5908%) hue-rotate(344deg) brightness(99%) contrast(105%);
+$svg-main-blue: brightness(0) saturate(100%) invert(11%) sepia(28%) saturate(1265%) hue-rotate(152deg) brightness(90%) contrast(96%);;
+
+$border-color: #EDEEF0;
+$border-radius: 4px;
+
+
+@font-face {
+  font-family: "Plus Jakarta";
+  src: url("../fonts/PlusJakartaSans-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: "Plus Jakarta", sans-serif !important;
+  line-height: 1.125rem !important;
+}
+
+.text-light {
+  color: blue;
+}
+
+.btn.btn-primary {
+  height: 42px;
+  background: $main-blue;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+
+  .plus-sign {
+    position: relative;
+
+    &:after {
+      content: '+';
+      position: absolute;
+      font-size: 30px;
+      top: -16px;
+      left: 39px;
+      font-weight: 100;
+    }
+  }
+  &.inCart {
+    padding-left: 30px;
+    background: $green;
+    .plus-sign {
+      display: none;
+    }
+    &:after {
+      content: 'In Cart';
+    }
+  }
+
+  &:focus, &:active {
+    box-shadow: 0 0 0 0.25rem $orange;
+  }
+
+  &:hover, &:active {
+    background-color: $orange;
+    color: $main-blue;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+img.icon {
+  filter: $svg-white;
+}
+
+header {
+  height: 62px;
+  background: $main-blue;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 30;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+
+  color: #fff;
+  font-size: 18px;
+
+  .nav-back, .actions {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    border-radius: $border-radius;
+  }
+
+  .nav-back {
+    padding: 0 10px;
+    background-color: transparent;
+    transition: .2s;
+
+    &:hover {
+      background-color: white;
+      cursor: pointer;
+      color: $main-blue;
+
+      img {
+        filter: $svg-main-blue;
+      }
+
+      &:after {
+        left: 30px;
+      }
+    }
+
+    span {
+      margin: 0 7px;
+    }
+  }
+
+  .actions {
+    .action {
+      transition: .25s;
+      padding: 5.5px;
+      border-radius: 4px;
+
+      .heart {
+        svg {
+          fill: red;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: white;
+        &.heart {
+          svg {
+            fill: $red;
+            path {
+              stroke: $red;
+            }
+          }
+        }
+        &.folder {
+          svg {
+            fill: $orange;
+            path {
+              stroke: $orange;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+main {
+  padding: 20px;
+
+  .search-form {
+    display: grid;
+    grid-template: repeat(4, 42px) / repeat(4, 1fr);
+    gap: 10px;
+
+    input, select {
+      &:focus, &:active, &:hover {
+        &:not(.is-invalid) {
+          box-shadow: 0 0 0 0.25rem $orange;
+          border: 1px solid #ced4da;
+        }
+      }
+    }
+
+    #artist-container {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 2;
+
+      #artist {
+        height: 42px;
+      }
+    }
+
+    #genre {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    #decade {
+      grid-column-start: 3;
+      grid-column-end: 5;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    #country {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 3;
+      grid-row-end: 4;
+    }
+
+    #submitSearch {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 4;
+      grid-row-end: 5;
+    }
+
+    &.has-errors {
+      grid-template: minmax(42px, 60px) repeat(3, 42px) / repeat(4, 1fr);
+    }
+  }
+
+  .products {
+    color: $dark-blue;
+    font-size: 14px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(155px, 300px), 1fr));
+    gap: 15px;
+
+
+    .product {
+      margin-bottom: 5px;
+      background-color: white;
+      padding: 0;
+      border-radius: 8px;
+      transition: .25s;
+      display: flex;
+      flex-direction: column;
+
+      .cover {
+        overflow: hidden;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        position: relative;
+
+        img {
+          width: 100%;
+          transition: 1s;
+        }
+
+        .like-button {
+          transition: .25s;
+
+          rect, svg, path{
+            transition: .25s;
+          }
+
+          position: absolute;
+          z-index: 20;
+          top: 10px;
+          left: 10px;
+          border: 3px solid transparent;
+          border-radius: 7px;
+
+          &.liked {
+            svg {
+              fill: $red;
+            }
+            path {
+              stroke: $red;
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+            border-color: white;
+            svg {
+            }
+            rect {
+              fill: $red;
+            }
+            path {
+              stroke: white;
+            }
+          }
+        }
+      }
+
+      .name {
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+
+      .author {
+        font-weight: 500;
+        margin-bottom: 7px;
+      }
+
+      .description {
+        span {
+          &:first-child {
+            color: $gray;
+          }
+        }
+
+        margin-bottom: 3px;
+
+        &:last-of-type {
+          margin-bottom: 10px;
+        }
+      }
+
+      .btn {
+        margin-top: auto;
+        padding-right: 30px;
+      }
+
+      &:hover, &:focus {
+        transform: scale(1.07);
+        padding: 5px;
+        background-color: #607d8b;
+        color: white;
+        font-size: 13px;
+
+
+        .description span:first-child {
+          color: #cdcdcd;
+        }
+
+        .btn > span {
+          font-size: 16px;
+        }
+
+        img {
+          transform: scale(1.15);
+        }
+
+        .like-button {
+          top: 7px;
+          left: 7px;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    margin: 20px 0;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+
+    .pageNumber, .etc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      color: #738286;
+    }
+
+    .pageNumber {
+      border-radius: 8px;
+      background-color: white;
+      transition: .2s;
+
+      &.active {
+        background-color: $main-blue;
+        color: #fff;
+      }
+
+      &:hover:not(.active) {
+        cursor: pointer;
+        background-color: $orange;
+        color: white;
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  header {
+    padding: 0 50px;
+  }
+  main {
+    padding: 15px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .search-form {
+      max-width: 1150px;
+      justify-content: center;
+      grid-template: repeat(1, 42px) / repeat(5, 1fr);
+      &.has-errors {
+        grid-template: repeat(1, 42px) / repeat(5, 1fr);
+      }
+      gap: 15px;
+      margin-bottom: 20px;
+
+      #artist-container {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+
+      #genre {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+
+      #decade {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+
+      #country {
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+
+      #submitSearch {
+        grid-column-start: 5;
+        grid-column-end: 6;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+    }
+
+    .products {
+      grid-template-columns: repeat(auto-fill, minmax(min(200px, 250px), 1fr));
+      gap: 15px;
+
+      .product:hover {
+        padding: 7px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header {
+    padding: 0 100px;
+  }
+  main {
+    padding: 15px 100px;
+  }
+
+  .products {
+
+    .product:hover {
+      padding: 10px;
+    }
+  }
+}
